@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+  
   let operand1 = "";
   let operator1 = "";
   let operand2 = "";
@@ -56,7 +57,13 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("equal").addEventListener('click', function() {
     equalClick('=');
   });
+  document.getElementById("clear").addEventListener('click', function() {
+    clearAll();
+  });
 
+  document.getElementById("delete").addEventListener('click',function() {
+    deleteLast();
+  }); 
   document.getElementById("ans").addEventListener('click', function() {
     operand1 = answer.toString();
     operator1 = "";
@@ -66,7 +73,18 @@ document.addEventListener("DOMContentLoaded", function() {
     ansClicked = true;
 });
 
+function clearAll () {
+  operand1 ="";
+  operand2 ="";
+  operator1 ="";
+  display.innerText="You wiped my memory How Dare YOU ?";
+  operatorClicked =false ;
+  ansClicked =false ; 
+}
+
 function digitClicks(digit) {
+
+  
     if (ansClicked) {
         operand1 = "";
         ansClicked = false;
