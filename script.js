@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
   let operand1 = "";
   let operator1 = "";
-  let operand2 ="";
+  let operand2 = "";
   let display = document.getElementById("display-port");
   let operatorClicked = false;
-  let result = null;
-  let ansClicked = false; 
+  let answer = "";
+  let ansClicked = false; // Flag for the "ans" button
 
   // Add click event listeners for digits
   document.getElementById("one").addEventListener('click', function() {
@@ -53,66 +53,78 @@ document.addEventListener("DOMContentLoaded", function() {
     operatorClick('/');
   });
 
-
   document.getElementById("equal").addEventListener('click', function() {
     equalClick('=');
   });
 
   document.getElementById("ans").addEventListener('click', function() {
-    storeAnswer('ans');
-    ansClicked=true;
-  });
-
-
-  // Handle digit clicks and update the display
-  function digitClicks(digit) {
-    if (!operatorClicked && !result) {
-      operand1 += digit;
-      display.innerText = operand1;
-    } else if (ansClicked && result !== "" && operatorClicked=true) {
-    operand1 =answer ;
-    display.innerText =operand1 ;
-    }
-     else if  (operatorClicked=true ) {
-      operand2 += digit;
-      display.innerText =  operator1 + operand2;
-    }
-  }
-
-  // Handle operator clicks
-  function operatorClick(operator) {
-    if (operand1 !== "" || operand2 !== "" && !result) {
-      operator1 = operand1+ operator;
-      display.innerText = operator1;
-      operatorClicked = true;
-    } else if (operand1 !=="" && result ) {
-
-    }
-  }
-
-  let equalClicked =false; 
-
-function equalClick(equal) {
-  if (!equalClicked && operand1 !== "" && operand2 !== "") {
-    const expression = operator1 + operand2 + "";
-    let result = eval(expression);
-
-    display.innerText = result;
-    equalClicked = true;
-    operatorClicked = false ;
-  }
-}
-
-function storeAnswer(ans) {
-  if(equalClicked) {
-    let answer = result;
-    operand1 = "";
+    operand1 = answer.toString();
     operator1 = "";
     operand2 = "";
-    equalClicked =false ; 
-  }
-  
+    display.innerText = operand1;
+    operatorClicked = false;
+    ansClicked = true;
+});
+
+function digitClicks(digit) {
+    if (ansClicked) {
+        operand1 = "";
+        ansClicked = false;
+    }
+
+    if (!operatorClicked) {
+        operand1 += digit;
+        display.innerText = operand1;
+    } else {
+        operand2 += digit;
+        display.innerText = operand1 + operator1 + operand2;
+    }
 }
 
-}); 
+function operatorClick(operator) {
+  if (operand1 !== "") {
+      if (!operatorClicked) {
+          operator1 = operator;
+          display.innerText = operand1 + operator1;
+          operatorClicked = true;
+      } else {
+          equalClick();
+          operator1 = operator;
+          operand1 = answer.toString();
+          operand2 = "";
+          display.innerText = operand1 + operator1;
+      }
+  }
+  ansClicked = false;  // Reset the flag here
+}
 
+
+function equalClick() {
+    if (operand1 && operand2) {
+        let calculatedResult;
+        switch (operator1) {
+            case '+':
+                calculatedResult = parseFloat(operand1) + parseFloat(operand2);
+                break;
+            case '-':
+                calculatedResult = parseFloat(operand1) - parseFloat(operand2);
+                break;
+            case '*':
+                calculatedResult = parseFloat(operand1) * parseFloat(operand2);
+                break;
+            case '/':
+                calculatedResult = parseFloat(operand1) / parseFloat(operand2);
+                break;
+        }
+
+        answer = calculatedResult;
+        display.innerText = answer;
+
+        // Reset the variables for next calculation
+        operand1 = answer.toString();
+        operator1 = "";
+        operand2 = "";
+        operatorClicked = false;
+    }
+}
+});
