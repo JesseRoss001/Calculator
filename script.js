@@ -1,5 +1,41 @@
 document.addEventListener("DOMContentLoaded", function() {
-  
+  let isOn = false;
+  const displayText = document.getElementById("display-port");
+  const onButton = document.getElementById("on");
+  const offButton = document.getElementById("off");
+  const calculatorContainer = document.getElementById("calculator-container"); // New line
+
+  // Default state
+  calculatorContainer.classList.add('bg-dark');
+  calculatorContainer.classList.add('off-text-white'); // Adjusted this line
+  displayText.innerText = "Turn me on";
+
+  offButton.addEventListener('click', function() {
+    if (isOn) {
+      isOn = false;
+      calculatorContainer.classList.add('bg-dark'); // Adjusted this line
+      calculatorContainer.classList.remove('bg-body-secondary');
+      calculatorContainer.classList.add('off-text-white');
+      calculatorContainer.classList.remove('on-text-black'); 
+      displayText.innerText = "Turn me on";
+    }
+  });
+  onButton.addEventListener('click', function() {
+    if (!isOn) {
+      isOn = true;
+      calculatorContainer.classList.remove('bg-dark'); // Adjusted this line
+      calculatorContainer.classList.add('bg-body-secondary');
+      calculatorContainer.classList.remove('off-text-white');
+      calculatorContainer.classList.add('on-text-black');  // Adjusted this line
+      displayText.innerText = "Press my buttons ";
+    }
+  });
+
+
+
+
+
+
   let operand1 = "";
   let operator1 = "";
   let operand2 = "";
@@ -73,6 +109,17 @@ document.addEventListener("DOMContentLoaded", function() {
     ansClicked = true;
 });
 
+document.getElementById("DEL").addEventListener('click', function() {
+  deleteLast();
+});
+
+
+
+
+
+
+
+
 function clearAll () {
   operand1 ="";
   operand2 ="";
@@ -80,6 +127,22 @@ function clearAll () {
   display.innerText="You wiped my memory How Dare YOU ?";
   operatorClicked =false ;
   ansClicked =false ; 
+}
+
+function deleteLast() {
+  if (!operatorClicked) {
+      operand1 = operand1.slice(0, -1);
+      display.innerText = operand1 || "0";
+  } else {
+      if (operand2) {
+          operand2 = operand2.slice(0, -1);
+          display.innerText = operand1 + operator1 + operand2;
+      } else {
+          operator1 = "";
+          display.innerText = operand1;
+          operatorClicked = false;
+      }
+  }
 }
 
 function digitClicks(digit) {
@@ -145,4 +208,6 @@ function equalClick() {
         operatorClicked = false;
     }
 }
+
+
 });
