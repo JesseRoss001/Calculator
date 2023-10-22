@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   let operand1 = "";
   let operator1 = "";
+  let operand2 ="";
   let display = document.getElementById("display-port");
   let operatorClicked = false;
 
@@ -56,17 +57,21 @@ document.addEventListener("DOMContentLoaded", function() {
       operand1 += digit;
       display.innerText = operand1;
     }
+
+    else if (operatorClicked && operand1 !=="") { operand2 += digit;
+      display.innerText = operator1 + operand2;}
   }
 
   // Handle operator clicks
   function operatorClick(operator) {
-    if (operand1 !== "") {
+    if (operand1 !== "" || operand2 !== "") {
       operator1 = operand1 + operator;
       display.innerText = operator1;
       operatorClicked = true;
   
     }
   }
+
 });
 
 
