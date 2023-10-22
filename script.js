@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let operand2 ="";
   let display = document.getElementById("display-port");
   let operatorClicked = false;
-  let equalClicked =false; 
+  
 
   // Add click event listeners for digits
   document.getElementById("one").addEventListener('click', function() {
@@ -64,26 +64,29 @@ document.addEventListener("DOMContentLoaded", function() {
       display.innerText = operand1;
     } else {
       operand2 += digit;
-      display.innerText = operand1 + operator1 + operand2;
+      display.innerText =  operator1 + operand2;
     }
   }
 
   // Handle operator clicks
   function operatorClick(operator) {
     if (operand1 !== "" || operand2 !== "") {
-      operator1 = operand1 + operator;
+      operator1 = operand1+ operator;
       display.innerText = operator1;
       operatorClicked = true;
     }
   }
-});
+
+  let equalClicked =false; 
 
 function equalClick(equal) {
   if (!equalClicked && operand1 !== "" && operand2 !== "") {
-    const expression = operand1 + operator1 + operand2;
+    const expression = operator1 + operand2 + "";
     let result = eval(expression);
 
     display.innerText = result;
     equalClicked = true;
   }
 }
+});
+
