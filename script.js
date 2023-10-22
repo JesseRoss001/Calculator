@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
   let operand2 ="";
   let display = document.getElementById("display-port");
   let operatorClicked = false;
-  
+  let result = null;
+  let ansClicked = false; 
 
   // Add click event listeners for digits
   document.getElementById("one").addEventListener('click', function() {
@@ -57,12 +58,22 @@ document.addEventListener("DOMContentLoaded", function() {
     equalClick('=');
   });
 
+  document.getElementById("ans").addEventListener('click', function() {
+    storeAnswer('ans');
+    ansClicked=true;
+  });
+
+
   // Handle digit clicks and update the display
   function digitClicks(digit) {
-    if (!operatorClicked) {
+    if (!operatorClicked && !result) {
       operand1 += digit;
       display.innerText = operand1;
-    } else {
+    } else if (ansClicked && result !== "" && operatorClicked=true) {
+    operand1 =answer ;
+    display.innerText =operand1 ;
+    }
+     else if  (operatorClicked=true ) {
       operand2 += digit;
       display.innerText =  operator1 + operand2;
     }
@@ -70,10 +81,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Handle operator clicks
   function operatorClick(operator) {
-    if (operand1 !== "" || operand2 !== "") {
+    if (operand1 !== "" || operand2 !== "" && !result) {
       operator1 = operand1+ operator;
       display.innerText = operator1;
       operatorClicked = true;
+    } else if (operand1 !=="" && result ) {
+
     }
   }
 
@@ -86,7 +99,20 @@ function equalClick(equal) {
 
     display.innerText = result;
     equalClicked = true;
+    operatorClicked = false ;
   }
 }
-});
+
+function storeAnswer(ans) {
+  if(equalClicked) {
+    let answer = result;
+    operand1 = "";
+    operator1 = "";
+    operand2 = "";
+    equalClicked =false ; 
+  }
+  
+}
+
+}); 
 
