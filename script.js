@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-  let operand1 = ""; // Initialize operand1 as an empty string
-
+  let operand1 = "";
+  let operator1 = "";
   let display = document.getElementById("display-port");
+  let operatorClicked = false;
 
   // Add click event listeners for digits
   document.getElementById("one").addEventListener('click', function() {
@@ -35,10 +36,36 @@ document.addEventListener("DOMContentLoaded", function() {
     digitClicks('0');
   });
 
+  // Add click event listeners for operators
+  document.getElementById("plus").addEventListener('click', function() {
+    operatorClick('+');
+  });
+  document.getElementById("minus").addEventListener('click', function() {
+    operatorClick('-');
+  });
+  document.getElementById("times").addEventListener('click', function() {
+    operatorClick('*');
+  });
+  document.getElementById("divide").addEventListener('click', function() {
+    operatorClick('/');
+  });
+
   // Handle digit clicks and update the display
   function digitClicks(digit) {
-    operand1 += digit;
-    display.innerText = operand1; // Update the display with operand1
+    if (!operatorClicked) {
+      operand1 += digit;
+      display.innerText = operand1;
+    }
+  }
+
+  // Handle operator clicks
+  function operatorClick(operator) {
+    if (operand1 !== "") {
+      operator1 = operand1 + operator;
+      display.innerText = operator1;
+      operatorClicked = true;
+  
+    }
   }
 });
 
