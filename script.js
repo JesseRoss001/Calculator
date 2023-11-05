@@ -3,17 +3,17 @@ document.addEventListener("DOMContentLoaded", function() {
   const displayText = document.getElementById("display-port");
   const onButton = document.getElementById("on");
   const offButton = document.getElementById("off");
-  const calculatorContainer = document.getElementById("calculator-container"); // New line
+  const calculatorContainer = document.getElementById("calculator-container"); 
 
   // Default state
   calculatorContainer.classList.add('bg-dark');
-  calculatorContainer.classList.add('off-text-white'); // Adjusted this line
+  calculatorContainer.classList.add('off-text-white');
   displayText.innerText = "Turn me on";
 
   offButton.addEventListener('click', function() {
     if (isOn) {
       isOn = false;
-      calculatorContainer.classList.add('bg-dark'); // Adjusted this line
+      calculatorContainer.classList.add('bg-dark'); 
       calculatorContainer.classList.remove('bg-body-secondary');
       calculatorContainer.classList.add('off-text-white');
       calculatorContainer.classList.remove('on-text-black'); 
@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
   onButton.addEventListener('click', function() {
     if (!isOn) {
       isOn = true;
-      calculatorContainer.classList.remove('bg-dark'); // Adjusted this line
+      calculatorContainer.classList.remove('bg-dark'); 
       calculatorContainer.classList.add('bg-body-secondary');
       calculatorContainer.classList.remove('off-text-white');
-      calculatorContainer.classList.add('on-text-black');  // Adjusted this line
+      calculatorContainer.classList.add('on-text-black'); 
       displayText.innerText = "Press my buttons ";
     }
   });
