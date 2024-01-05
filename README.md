@@ -1,10 +1,9 @@
-
+![Calculator View](calculator-view.png)
 # Calculator v1
 
 This repository contains the source code and assets for the [Calculator v1 Project](https://jesseross001.github.io/Calculator/). A simple and intuitive calculator built to perform basic arithmetic operations.
 
-## Screenshots
-![Calculator View](calculator-view.png)
+
 
 ## Features
 - Basic arithmetic operations (addition, subtraction, multiplication, division)
