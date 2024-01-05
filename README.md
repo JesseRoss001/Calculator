@@ -1,4 +1,4 @@
-![Calculator View](calculator-view.png)
+![Calculator View](https://res.cloudinary.com/dwz6t9jry/image/upload/v1704476864/Screenshot_2024-01-05_125941_tjw8hy.png)
 # Calculator v1
 
 This repository contains the source code and assets for the [Calculator v1 Project](https://jesseross001.github.io/Calculator/). A simple and intuitive calculator built to perform basic arithmetic operations.
